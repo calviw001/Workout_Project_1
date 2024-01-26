@@ -1,5 +1,5 @@
 import sys
-
+from pathlib import Path
 
 def invert_sentence(sentence):
     if len(sentence) == 1:
@@ -9,8 +9,11 @@ def invert_sentence(sentence):
 
 
 def read_file(file_name):
+    current_directory = Path.cwd()
+    file_path = current_directory / file_name
+    # print(current_directory)
     cypher_list = []
-    with open(file_name) as text_file:
+    with file_path.open("r") as text_file:
         for line in text_file:
             get_sentence = line.strip()
             cypher_list.append(invert_sentence(get_sentence))
