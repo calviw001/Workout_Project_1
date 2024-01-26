@@ -1,6 +1,18 @@
 import sys
 from pathlib import Path
 
+def get_user_inputs():
+    try:
+        assert len(sys.argv) == 3
+        assert sys.argv[0] == "wp1.py"
+        input_file = sys.argv[1]
+        output_file = sys.argv[2]
+        return input_file, output_file
+    except AssertionError:
+        print("Usage: python wp1.py input_file_name output_file_name")
+        sys.exit()
+
+
 def invert_sentence(sentence):
     if len(sentence) == 1:
         return sentence
@@ -30,10 +42,10 @@ def write_into_file(cypher_list, file_name):
     
 
 def main():
-    b_file = "oldtext.txt"
-    a_file = "newtext.txt"
-
-    cypher_list = read_file(a_file)
-    write_into_file(cypher_list, b_file)
+    # input_file = "oldtext.txt"
+    # output_file = "newtext.txt"
+    input_file, output_file = get_user_inputs()
+    cypher_list = read_file(input_file)
+    write_into_file(cypher_list, output_file)
 
 main()
