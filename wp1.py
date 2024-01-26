@@ -7,12 +7,19 @@ def invert_sentence(sentence):
     else:
         return sentence[-1] + invert_sentence(sentence[0:-1])
 
+
 def read_file(file_name):
-    pass
+    cypher_list = []
+    with open(file_name) as text_file:
+        for line in text_file:
+            get_sentence = line.strip()
+            cypher_list.append(invert_sentence(get_sentence))
+    print(cypher_list)
+    return cypher_list
     
 
 def main():
     a_file = "oldtext.txt"
-    read_file(a_file)
+    cypher_list = read_file(a_file)
 
 main()
