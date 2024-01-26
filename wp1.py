@@ -4,7 +4,6 @@ from pathlib import Path
 def get_user_inputs():
     try:
         assert len(sys.argv) == 3
-        assert sys.argv[0] == "wp1.py"
         input_file = sys.argv[1]
         output_file = sys.argv[2]
         return input_file, output_file
@@ -22,15 +21,20 @@ def invert_sentence(sentence):
 
 def read_file(file_name):
     current_directory = Path.cwd()
-    file_path = current_directory / file_name
-    # print(current_directory)
     cypher_list = []
-    with file_path.open("r") as text_file:
-        for line in text_file:
-            get_sentence = line.strip()
-            cypher_list.append(invert_sentence(get_sentence))
-    # print(cypher_list)
-    return cypher_list
+    try:
+        file_path = current_directory / file_name
+        # print(current_directory)
+        cypher_list = []
+        with file_path.open("r") as text_file:
+            for line in text_file:
+                get_sentence = line.strip()
+                cypher_list.append(invert_sentence(get_sentence))
+        # print(cypher_list)
+        return cypher_list
+    except FileNotFoundError:
+        print("Your input file does not exist!!")
+        sys.exit()
     
 
 def write_into_file(cypher_list, file_name):
