@@ -15,6 +15,8 @@ def get_user_inputs():
 def invert_sentence(sentence):
     if len(sentence) == 1:
         return sentence
+    if len(sentence) == 0:
+        return sentence
     else:
         return sentence[-1] + invert_sentence(sentence[0:-1])
 
@@ -26,8 +28,9 @@ def read_file(file_name):
         file_path = current_directory / file_name
         # print(current_directory)
         cypher_list = []
-        with file_path.open("r") as text_file:
+        with file_path.open("r",encoding='utf-8') as text_file:
             for line in text_file:
+                # print(line)
                 get_sentence = line.strip()
                 cypher_list.append(invert_sentence(get_sentence))
         # print(cypher_list)
